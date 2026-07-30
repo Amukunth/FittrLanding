@@ -1,0 +1,440 @@
+<!doctype html>
+<!--
+  DIRECTION CONTRACT — Fittr waitlist
+
+  THESIS: A fight card, not a fitness app. Refuses the category's soft gradient
+  hero with a floating phone mockup, and its predictable opposite, the neon-glow
+  betting dashboard.
+
+  OWN-WORLD: Two-color screenprint on black card stock — voltage green ink, bone
+  paper plates, zero radius, 45° ticket notches, a fixed −8° shear, depth by
+  registration offset. Every figure drawn in Olympic sport-pictogram grammar.
+  Big Shoulders Display over Archivo.
+
+  STORY: The visitor learns in one line that they stake real money on physical
+  challenges against friends; believes it because a rep counter locks on inside
+  a viewfinder instead of a claim being made; acts by dropping an email into a
+  full-width voltage field.
+
+  FIRST VIEWPORT: Black sheet, sheared halftone bars. Three condensed slabs,
+  "FREE." in voltage on the last line, email + JOIN WAITLIST directly beneath,
+  bone counter plate ("X of 1,000 claimed") at the fold. Authored SVG of a
+  push-up at top position with a tripod phone filming closes the section.
+
+  FORM: Fight card / tale-of-the-tape, staged as a screenprint poster. World and
+  section structure were pinned by the brief, so no concept roll was run — a
+  pinned direction beats the roll.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fittr — First 1,000 people get $20. Free.</title>
+<meta name="description" content="Join the Fittr waitlist and the first 1,000 people get $20, free, at launch — no deposit, no catch. Then wager it on push-ups, planks, wall sits and races, camera-verified so nobody fakes a hold and no bot can play.">
+<meta name="theme-color" content="#0A0A0B">
+<meta property="og:title" content="Fittr — First 1,000 people get $20. Free.">
+<meta property="og:description" content="No deposit, no catch — join the waitlist and the first 1,000 people get $20 credited at launch.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;700;800;900&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip" href="#top">Skip to content</a>
+
+<!-- Shown only when the page is opened from a referral link (?ref=CODE). -->
+<div class="refbar" id="refbar" hidden>
+  <p class="refbar__txt">
+    <strong id="refbar-name">A friend</strong> sent you. You both get the launch bonus.
+  </p>
+</div>
+
+<header class="topbar">
+  <a class="wordmark" href="#top" aria-label="Fittr, home">
+    <span class="wordmark__ink" aria-hidden="true">FITTR</span>
+    <span class="wordmark__top">FITTR</span>
+  </a>
+  <a class="btn btn--ghost btn--sm topbar__cta js-join-link" href="/join">Get early access</a>
+</header>
+
+<main id="top">
+
+  <!-- ═══ 1 · HERO ═══════════════════════════════════════════════════ -->
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="hero__bars" aria-hidden="true"></div>
+    <div class="hero__grain" aria-hidden="true"></div>
+
+    <div class="hero__inner wrap">
+
+      <p class="kicker kicker--hero">Pre-launch · Waitlist open</p>
+
+      <h1 class="hero__h" id="hero-h">
+        First 1,000 people get $20. <span class="hero__line--pay">Free.</span>
+      </h1>
+
+      <!-- PLACEHOLDER: $20 credit amount, source, and eligibility terms are
+           not finalized — pending confirmation before this ships live. -->
+      <p class="hero__sub" data-placeholder="incentive-terms">
+        No deposit, no catch — just join the waitlist. $20 credited to your
+        account the moment we launch.
+      </p>
+
+      <!-- Links out to the real multi-step signup flow in waitlist-app/. -->
+      <div class="join" id="join">
+        <a class="btn btn--primary btn--block join__btn js-join-link" href="/join">
+          Join waitlist
+        </a>
+      </div>
+
+      <!-- PLACEHOLDER: no real waitlist exists yet. Wire to the live count,
+           and cut the tally off once all 1,000 spots are claimed. -->
+      <div class="tally" data-placeholder="waitlist-count">
+        <span class="tally__n" id="tally-n" data-to="612">612</span>
+        <span class="tally__l">of 1,000 spots claimed</span>
+      </div>
+
+      <!-- Authored scene: push-up at top position, tripod phone filming.
+           Sport-pictogram grammar; no photography, no stock. -->
+      <div class="scene" role="img" aria-label="Illustration: a person holding the top of a push-up while a phone on a tripod films them, with camera tracking brackets locked around their body.">
+        <svg class="scene__svg" viewBox="0 0 900 420" preserveAspectRatio="xMidYMax meet" focusable="false" aria-hidden="true">
+
+          <!-- camera cone: fanned wide enough that both edges clear the whole
+               figure envelope (head to hand, y 100-350), not just its base -->
+          <g class="scene__cone">
+            <path d="M796 196 L100 24 L100 372 Z" fill="var(--voltage)" opacity=".08"/>
+            <path d="M796 196 L100 24" stroke="var(--voltage)" stroke-width="2.5" opacity=".22"/>
+            <path d="M796 196 L100 372" stroke="var(--voltage)" stroke-width="2.5" opacity=".22"/>
+          </g>
+
+          <!-- floor -->
+          <path d="M40 348 H860" stroke="var(--bone)" stroke-width="4" opacity=".4"/>
+          <g stroke="var(--bone)" stroke-width="3" opacity=".14">
+            <path d="M80 348 l-24 32"/><path d="M170 348 l-24 32"/><path d="M260 348 l-24 32"/>
+            <path d="M350 348 l-24 32"/><path d="M440 348 l-24 32"/><path d="M530 348 l-24 32"/>
+            <path d="M620 348 l-24 32"/><path d="M710 348 l-24 32"/><path d="M800 348 l-24 32"/>
+          </g>
+
+          <!-- athlete, top of a push-up -->
+          <g stroke="var(--bone-shade)" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" fill="none">
+            <path d="M292 186 V344"/>
+            <path d="M500 246 L622 300 L642 344"/>
+          </g>
+          <g stroke="var(--bone)" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" fill="none">
+            <path d="M236 166 L204 154"/>
+            <path d="M236 166 L500 240 L662 296"/>
+            <path d="M662 296 L700 344"/>
+            <path d="M236 166 V344"/>
+          </g>
+          <circle cx="172" cy="140" r="33" fill="var(--bone)"/>
+          <circle cx="236" cy="344" r="16" fill="var(--bone)"/>
+
+          <!-- tripod + phone -->
+          <g class="scene__rig">
+            <g stroke="var(--voltage)" stroke-width="7" stroke-linecap="round" fill="none">
+              <path d="M800 222 V262"/>
+              <path d="M800 258 L768 344"/>
+              <path d="M800 258 L832 344"/>
+            </g>
+            <g transform="rotate(-8 802 196)">
+              <rect x="774" y="140" width="56" height="112" fill="var(--bone)"/>
+              <rect x="781" y="153" width="42" height="86" fill="var(--ink-black)"/>
+              <circle cx="802" cy="146" r="3.6" fill="var(--voltage)"/>
+              <path d="M789 168 h12 M789 177 h26" stroke="var(--voltage)" stroke-width="3.5" stroke-linecap="round"/>
+              <circle class="scene__rec" cx="814" cy="230" r="5" fill="var(--voltage)"/>
+            </g>
+          </g>
+
+          <!-- tracking brackets: these are what lock on -->
+          <g class="scene__hud" stroke="var(--voltage)" stroke-width="6" fill="none" stroke-linecap="square">
+            <path class="hud-c hud-c--tl" d="M104 128 V74 H162"/>
+            <path class="hud-c hud-c--tr" d="M676 74 H734 V128"/>
+            <path class="hud-c hud-c--bl" d="M104 322 V376 H162"/>
+            <path class="hud-c hud-c--br" d="M676 376 H734 V322"/>
+          </g>
+        </svg>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══ 2 · HOW IT WORKS ═══════════════════════════════════════════ -->
+  <section class="how" aria-labelledby="how-h">
+    <div class="wrap">
+      <h2 class="h2" id="how-h">How a bout works</h2>
+
+      <ol class="steps" role="list">
+        <li class="step">
+          <span class="step__n">1</span>
+          <span class="step__ico" aria-hidden="true">
+            <svg viewBox="0 0 100 100" focusable="false">
+              <g stroke="currentColor" stroke-width="8" stroke-linecap="round" fill="none">
+                <path d="M22 46 V78"/><path d="M22 54 L36 62"/>
+                <path d="M78 46 V78"/><path d="M78 54 L64 62"/>
+              </g>
+              <circle cx="22" cy="30" r="11" fill="currentColor"/>
+              <circle cx="78" cy="30" r="11" fill="currentColor"/>
+              <path d="M50 14 V86" stroke="currentColor" stroke-width="6" opacity=".45"/>
+            </svg>
+          </span>
+          <h3 class="step__h">Challenge a friend or join a pool</h3>
+          <p class="step__p">Pick the exercise, pick the stake, send it. Or drop into an open pool and take on whoever else is in it.</p>
+        </li>
+
+        <li class="step">
+          <span class="step__n">2</span>
+          <span class="step__ico" aria-hidden="true">
+            <svg viewBox="0 0 100 100" focusable="false">
+              <g stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                <path d="M34 44 L78 58"/><path d="M78 58 L86 76"/><path d="M34 44 V76"/>
+              </g>
+              <circle cx="21" cy="39" r="10" fill="currentColor"/>
+              <path d="M10 78 H92" stroke="currentColor" stroke-width="5" opacity=".45"/>
+              <g stroke="currentColor" stroke-width="5" fill="none">
+                <path d="M14 26 V14 H28"/><path d="M82 14 H94 V26"/>
+              </g>
+            </svg>
+          </span>
+          <h3 class="step__h">Compete — verified live</h3>
+          <p class="step__p">Push-ups, planks, wall sits or races. Prop the phone and the camera counts you; lace up and your watch times you.</p>
+        </li>
+
+        <li class="step">
+          <span class="step__n">3</span>
+          <span class="step__ico" aria-hidden="true">
+            <!-- winner pictogram: arms raised over a notched stub, in the same
+                 circle-head / uniform-stroke grammar as every other figure -->
+            <svg viewBox="0 0 100 100" focusable="false">
+              <g stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                <path d="M50 34 V60"/>
+                <path d="M50 34 L25 13"/><path d="M50 34 L75 13"/>
+                <path d="M50 60 L33 78"/><path d="M50 60 L67 78"/>
+              </g>
+              <circle cx="50" cy="19" r="11" fill="currentColor"/>
+              <path d="M24 78 H76 L84 94 H16 Z" fill="currentColor" opacity=".4"/>
+            </svg>
+          </span>
+          <h3 class="step__h">Winner takes the cash</h3>
+          <p class="step__p">The pot settles the moment the result is verified. No dispute thread, no waiting on a screenshot.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+
+  <!-- ═══ 3 · TALE OF THE TAPE ═══════════════════════════════════════ -->
+  <section class="tape" aria-labelledby="tape-h">
+    <div class="wrap">
+      <h2 class="h2 h2--dark" id="tape-h">Tale of the tape</h2>
+      <p class="tape__lede">Four ways to take someone's money. Every one of them fits in a hallway.</p>
+
+      <ul class="tape__list" role="list">
+        <li class="tape__row">
+          <span class="tape__ico" aria-hidden="true">
+            <svg viewBox="0 0 100 100" focusable="false">
+              <g stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                <path d="M33 34 L74 52"/><path d="M74 52 L84 76"/><path d="M33 34 V76"/>
+              </g>
+              <circle cx="19" cy="29" r="11" fill="currentColor"/>
+              <path d="M8 80 H92" stroke="currentColor" stroke-width="5" opacity=".4"/>
+              <!-- rep-count mark: this is the counted exercise, not the timed one -->
+              <g stroke="currentColor" stroke-width="4.5" stroke-linecap="round" fill="none" opacity=".55">
+                <path d="M90 26 L90 62"/>
+                <path d="M83 34 L90 24 L97 34"/>
+                <path d="M83 54 L90 64 L97 54"/>
+              </g>
+            </svg>
+          </span>
+          <span class="tape__body">
+            <span class="tape__name">Push-ups</span>
+            <span class="tape__desc">Most clean reps before the clock runs out.</span>
+          </span>
+          <span class="tape__verif"><span class="tape__vlabel">Verified by</span><span class="tape__vval">Camera</span></span>
+        </li>
+
+        <li class="tape__row">
+          <span class="tape__ico" aria-hidden="true">
+            <svg viewBox="0 0 100 100" focusable="false">
+              <g stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                <path d="M38 52 L78 62"/><path d="M78 62 L86 76"/>
+                <path d="M38 52 V74"/><path d="M38 74 H12"/>
+              </g>
+              <circle cx="24" cy="47" r="11" fill="currentColor"/>
+              <path d="M8 80 H92" stroke="currentColor" stroke-width="5" opacity=".4"/>
+              <!-- hold-time mark: this is the timed exercise, not the counted one -->
+              <g stroke="currentColor" stroke-width="4.5" stroke-linecap="round" fill="none" opacity=".55">
+                <circle cx="90" cy="40" r="14"/>
+                <path d="M90 32 V40 L97 45"/>
+              </g>
+            </svg>
+          </span>
+          <span class="tape__body">
+            <span class="tape__name">Plank hold</span>
+            <span class="tape__desc">Last one still holding form wins the pot.</span>
+          </span>
+          <span class="tape__verif"><span class="tape__vlabel">Verified by</span><span class="tape__vval">Camera</span></span>
+        </li>
+
+        <li class="tape__row">
+          <span class="tape__ico" aria-hidden="true">
+            <svg viewBox="0 0 100 100" focusable="false">
+              <path d="M20 8 V88" stroke="currentColor" stroke-width="7" opacity=".4"/>
+              <g stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                <path d="M32 34 V60"/><path d="M32 60 H62"/><path d="M62 60 V86"/>
+              </g>
+              <circle cx="32" cy="22" r="11" fill="currentColor"/>
+              <path d="M20 86 H90" stroke="currentColor" stroke-width="5" opacity=".4"/>
+              <g stroke="currentColor" stroke-width="4.5" stroke-linecap="round" fill="none" opacity=".55">
+                <circle cx="90" cy="40" r="14"/>
+                <path d="M90 32 V40 L97 45"/>
+              </g>
+            </svg>
+          </span>
+          <span class="tape__body">
+            <span class="tape__name">Wall sit</span>
+            <span class="tape__desc">Back on the wall, thighs flat. First to stand loses.</span>
+          </span>
+          <span class="tape__verif"><span class="tape__vlabel">Verified by</span><span class="tape__vval">Camera</span></span>
+        </li>
+
+        <li class="tape__row">
+          <span class="tape__ico" aria-hidden="true">
+            <svg viewBox="0 0 100 100" focusable="false">
+              <g stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                <path d="M58 34 L44 58"/>
+                <path d="M44 58 L66 68 L70 88"/>
+                <path d="M44 58 L24 74 L10 74"/>
+                <path d="M52 42 L74 34 L80 48"/>
+                <path d="M52 42 L30 40"/>
+              </g>
+              <circle cx="66" cy="20" r="11" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="tape__body">
+            <span class="tape__name">Race</span>
+            <span class="tape__desc">Run it or ride it. Fastest split takes the money.</span>
+          </span>
+          <span class="tape__verif"><span class="tape__vlabel">Verified by</span><span class="tape__vval">Apple&nbsp;Watch</span></span>
+        </li>
+      </ul>
+
+      <p class="tape__foot">No gear needed — just your phone and a flat piece of floor.</p>
+    </div>
+  </section>
+
+
+  <!-- ═══ 4 · PROOF + REFERRAL ═══════════════════════════════════════ -->
+  <section class="proof" aria-labelledby="proof-h">
+    <div class="wrap proof__inner">
+
+      <div class="proof__copy">
+        <h2 class="h2" id="proof-h">Verified,<br>not guessed.</h2>
+        <p class="proof__p">
+          Every rep is counted by the camera while you do it, and every second of
+          a hold is timed against your actual body position. There is no honor
+          system to game and no screenshot to forge.
+        </p>
+        <p class="proof__punch">And there is nothing here for a bot to play, because a bot can't do a push-up.</p>
+
+        <ul class="stamps" role="list">
+          <li class="stamp">No bots</li>
+          <li class="stamp">No self-reporting</li>
+          <li class="stamp">No disputed results</li>
+        </ul>
+      </div>
+
+      <div class="hud" id="hud" aria-hidden="true">
+        <div class="hud__frame">
+          <svg class="hud__svg" viewBox="0 0 320 302" focusable="false">
+            <g stroke="var(--bone)" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" fill="none">
+              <path d="M96 108 L248 152"/><path d="M248 152 L262 196"/><path d="M96 108 V196"/>
+            </g>
+            <circle cx="74" cy="96" r="24" fill="var(--bone)"/>
+            <path d="M30 200 H296" stroke="var(--bone)" stroke-width="4" opacity=".35"/>
+            <g class="hud__brackets" stroke="var(--voltage)" stroke-width="5" fill="none" stroke-linecap="square">
+              <path class="hb hb--tl" d="M40 74 V44 H74"/>
+              <path class="hb hb--tr" d="M246 44 H280 V74"/>
+              <path class="hb hb--bl" d="M40 190 V220 H74"/>
+              <path class="hb hb--br" d="M246 220 H280 V190"/>
+            </g>
+          </svg>
+          <div class="hud__readout">
+            <span class="hud__lab">Reps</span>
+            <span class="hud__num" id="hud-num" data-to="47">47</span>
+          </div>
+          <div class="hud__stamp" id="hud-stamp">Verified</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="wrap">
+      <div class="refer">
+        <div class="refer__main">
+          <h3 class="refer__h">Refer a friend.<br>You both get a bonus at launch.</h3>
+          <!-- PLACEHOLDER: bonus amount and referral mechanics not finalized. -->
+          <p class="refer__p" data-placeholder="referral-terms">
+            Every person who joins on your link moves you up the line, and drops a
+            launch-day balance into both accounts. You get your link the second you sign up.
+          </p>
+          <a class="btn btn--ghost js-join-link" href="/join">Claim your place</a>
+        </div>
+        <!-- PLACEHOLDER: derived from the live waitlist count. -->
+        <div class="refer__pos" data-placeholder="waitlist-position">
+          <span class="refer__poslab">Next position in line</span>
+          <span class="refer__posn">#4,813</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ 5 · CLOSE ══════════════════════════════════════════════════ -->
+  <section class="close" aria-labelledby="close-h">
+    <div class="wrap">
+      <h2 class="close__h" id="close-h">
+        <span>Somebody in</span>
+        <span>your group chat</span>
+        <span class="close__pay">is about to lose.</span>
+      </h2>
+      <a class="btn btn--primary btn--block js-join-link" href="/join">Get early access</a>
+      <p class="close__note">Free to join the waitlist. We'll email you once, when it opens.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__top">
+      <span class="wordmark wordmark--foot">
+        <span class="wordmark__ink" aria-hidden="true">FITTR</span>
+        <span class="wordmark__top">FITTR</span>
+      </span>
+      <nav class="foot__nav" aria-label="Legal">
+        <a href="#" data-placeholder="legal-link">Terms</a>
+        <a href="#" data-placeholder="legal-link">Privacy</a>
+        <a href="#" data-placeholder="legal-link">Responsible play</a>
+      </nav>
+    </div>
+    <!-- PLACEHOLDER: full disclaimer pending gaming-counsel review. -->
+    <p class="foot__legal" data-placeholder="compliance">
+      18+ only. Fittr contests are contests of physical skill, not games of chance.
+      Real-money play will not be available in every state or country at launch, and
+      we will confirm your eligibility before you deposit anything. Joining the
+      waitlist is free and requires no purchase.
+    </p>
+    <p class="foot__legal foot__legal--fine">© <span id="yr">2026</span> Fittr. Pre-launch — nothing on this page is available to buy yet.</p>
+  </div>
+</footer>
+
+<div class="dock" id="dock" hidden>
+  <span class="dock__txt">Waitlist is open</span>
+  <a class="btn btn--primary btn--sm js-join-link" href="/join">Get early access</a>
+</div>
+
+<script src="app.js" defer></script>
+</body>
+</html>

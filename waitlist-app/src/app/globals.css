@@ -1,0 +1,160 @@
+@import "tailwindcss";
+
+/* ════════════════════════════════════════════════════════════════════
+   FITTR — "The Fight Card", onboarding surface.
+   Inherits the landing page's system verbatim; see ../../../DESIGN.md.
+   Two-color screenprint on black stock: one acid ink, one bone paper.
+   ════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* Corner radius is 0 everywhere in this system, so the namespace is cleared
+     outright — `rounded-*` should not be reachable by accident. */
+  --radius-*: initial;
+
+  --color-ink: #0a0a0b;
+  --color-ink-deep: #050506;
+  --color-voltage: #c8ff2e;
+  --color-voltage-deep: #a8db16;
+  --color-voltage-shade: #2e3a00;
+  --color-bone: #efe8d8;
+  --color-bone-dim: #b3ac9b;
+  --color-bone-shade: #96907f;
+  --color-bone-ink: #4a463c;
+
+  --font-display: var(--font-big-shoulders), "Haettenschweiler", "Arial Narrow",
+    sans-serif;
+  --font-text: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
+
+  --ease-snap: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-step-fwd: step-fwd 260ms var(--ease-snap) both;
+  --animate-step-back: step-back 260ms var(--ease-snap) both;
+  --animate-ink-in: ink-in 320ms var(--ease-snap) both;
+  --animate-stamp: stamp 420ms var(--ease-snap) both;
+
+  @keyframes step-fwd {
+    from {
+      opacity: 0;
+      transform: translate3d(28px, 0, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  @keyframes step-back {
+    from {
+      opacity: 0;
+      transform: translate3d(-28px, 0, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  /* Ink laying down on the progress rail: the one authored moment here. */
+  @keyframes ink-in {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes stamp {
+    from {
+      opacity: 0;
+      transform: rotate(-8deg) scale(1.6);
+    }
+    to {
+      opacity: 1;
+      transform: rotate(-8deg) scale(1);
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    background: var(--color-ink);
+  }
+
+  body {
+    background: var(--color-ink);
+    color: var(--color-bone);
+    font-family: var(--font-text);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--color-voltage);
+    color: var(--color-ink);
+  }
+
+  /* Voltage reads against black stock and against bone; a bone ring would
+     vanish on the bone plates, so voltage is the default and ink the inverse. */
+  :focus-visible {
+    outline: 3px solid var(--color-voltage);
+    outline-offset: 3px;
+  }
+
+  .on-voltage :focus-visible,
+  .on-bone :focus-visible {
+    outline-color: var(--color-ink);
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+    color: inherit;
+  }
+}
+
+/* ── print devices ──────────────────────────────────────────────────
+   Depth is registration offset: a second ink layer sitting a few pixels
+   off its plate. Always hard-edged, always zero blur, always down-right. */
+
+@utility offset-bone {
+  box-shadow: 5px 5px 0 var(--color-bone);
+}
+@utility offset-bone-sm {
+  box-shadow: 3px 3px 0 var(--color-bone);
+}
+@utility offset-voltage {
+  box-shadow: 5px 5px 0 var(--color-voltage);
+}
+@utility offset-ink {
+  box-shadow: 5px 5px 0 var(--color-ink);
+}
+
+/* The ticket notch: a 45° corner cut off a torn fight-card stub. Only the
+   depth scales with the element — the angle is always exactly 45°. */
+@utility notch-lg {
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+}
+@utility notch-sm {
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+}
+
+/* Halftone: a tiled dot field that darkens a region without adding a colour.
+   Deliberately a small tiled radial-gradient, never repeating-radial-gradient,
+   which rings outward from one anchor and reads as a bullseye. */
+@utility halftone {
+  background-image: radial-gradient(var(--color-bone) 0.5px, transparent 0.5px);
+  background-size: 6px 6px;
+  opacity: 0.07;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
