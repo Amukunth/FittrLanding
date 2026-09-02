@@ -4,11 +4,9 @@ import { clientKey, rateLimit } from "@/lib/rate-limit";
 type Body = {
   email?: unknown;
   name?: unknown;
-  state?: unknown;
+  phone?: unknown;
   ageConfirmed?: unknown;
   termsAgreed?: unknown;
-  challengeInterests?: unknown;
-  referralSource?: unknown;
   referredByCode?: unknown;
 };
 
@@ -28,7 +26,11 @@ export async function POST(request: Request) {
     return Response.json({ error: "bad_request" }, { status: 400 });
   }
 
-  if (typeof body.email !== "string" || typeof body.state !== "string") {
+  if (
+    typeof body.email !== "string" ||
+    typeof body.name !== "string" ||
+    typeof body.phone !== "string"
+  ) {
     return Response.json({ error: "invalid" }, { status: 400 });
   }
 
@@ -40,15 +42,10 @@ export async function POST(request: Request) {
 
   const result = await createSignup({
     email: body.email,
-    state: body.state,
+    name: body.name,
+    phone: body.phone,
     ageConfirmed: true,
-    name: typeof body.name === "string" ? body.name : null,
     termsAgreed: body.termsAgreed === true,
-    challengeInterests: Array.isArray(body.challengeInterests)
-      ? body.challengeInterests.filter((v): v is string => typeof v === "string")
-      : [],
-    referralSource:
-      typeof body.referralSource === "string" ? body.referralSource : null,
     referredByCode:
       typeof body.referredByCode === "string" ? body.referredByCode : null,
   });

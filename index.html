@@ -29,11 +29,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Fittr — First 1,000 people get $20. Free.</title>
-<meta name="description" content="Join the Fittr waitlist and the first 1,000 people get $20, free, at launch — no deposit, no catch. Then wager it on push-ups, planks, wall sits and races, camera-verified so nobody fakes a hold and no bot can play.">
+<title>Fittr — First 1,000 people get $10 in Fittr credit.</title>
+<meta name="description" content="Join the Fittr waitlist and the first 1,000 people get $10 in Fittr credit at launch — no deposit, no catch. Credit is used in the app, not withdrawn as cash. Then wager it on push-ups, planks, wall sits and races, camera-verified so nobody fakes a hold and no bot can play.">
 <meta name="theme-color" content="#0A0A0B">
-<meta property="og:title" content="Fittr — First 1,000 people get $20. Free.">
-<meta property="og:description" content="No deposit, no catch — join the waitlist and the first 1,000 people get $20 credited at launch.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:title" content="Fittr — First 1,000 people get $10 in Fittr credit.">
+<meta property="og:description" content="No deposit, no catch — join the waitlist and the first 1,000 people get $10 in Fittr credit at launch. Used in the app, not cash.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,14 +72,13 @@
       <p class="kicker kicker--hero">Pre-launch · Waitlist open</p>
 
       <h1 class="hero__h" id="hero-h">
-        First 1,000 people get $20. <span class="hero__line--pay">Free.</span>
+        First 1,000 people get <span class="hero__line--pay">$10 in Fittr credit.</span>
       </h1>
 
-      <!-- PLACEHOLDER: $20 credit amount, source, and eligibility terms are
-           not finalized — pending confirmation before this ships live. -->
-      <p class="hero__sub" data-placeholder="incentive-terms">
-        No deposit, no catch — just join the waitlist. $20 credited to your
-        account the moment we launch.
+      <p class="hero__sub">
+        No deposit, no catch — just join the waitlist. $10 in Fittr credit
+        lands in your account the moment we launch. Credit can be used in
+        the app, not withdrawn as cash.
       </p>
 
       <!-- Links out to the real multi-step signup flow in waitlist-app/. -->
@@ -88,10 +88,10 @@
         </a>
       </div>
 
-      <!-- PLACEHOLDER: no real waitlist exists yet. Wire to the live count,
-           and cut the tally off once all 1,000 spots are claimed. -->
-      <div class="tally" data-placeholder="waitlist-count">
-        <span class="tally__n" id="tally-n" data-to="612">612</span>
+      <!-- Live count, fetched from /api/stats by app.js. The number shipped
+           here is only the fallback for no-JS/first-paint. -->
+      <div class="tally">
+        <span class="tally__n" id="tally-n" data-to="0">0</span>
         <span class="tally__l">of 1,000 spots claimed</span>
       </div>
 
@@ -374,17 +374,21 @@
       <div class="refer">
         <div class="refer__main">
           <h3 class="refer__h">Refer a friend.<br>You both get a bonus at launch.</h3>
-          <!-- PLACEHOLDER: bonus amount and referral mechanics not finalized. -->
-          <p class="refer__p" data-placeholder="referral-terms">
-            Every person who joins on your link moves you up the line, and drops a
-            launch-day balance into both accounts. You get your link the second you sign up.
+          <p class="refer__p">
+            $5 in Fittr credit for every friend who joins on your link and
+            downloads the app at launch — up to 2 referrals ($10 total). Every
+            referral also moves you up the line. You get your link the second
+            you sign up.
+          </p>
+          <p class="refer__p">
+            Credit can be used in the app, not withdrawn as cash.
           </p>
           <a class="btn btn--ghost js-join-link" href="/join">Claim your place</a>
         </div>
-        <!-- PLACEHOLDER: derived from the live waitlist count. -->
-        <div class="refer__pos" data-placeholder="waitlist-position">
+        <!-- Live position, fetched from /api/stats by app.js. -->
+        <div class="refer__pos">
           <span class="refer__poslab">Next position in line</span>
-          <span class="refer__posn">#4,813</span>
+          <span class="refer__posn" id="refer-posn">#—</span>
         </div>
       </div>
     </div>

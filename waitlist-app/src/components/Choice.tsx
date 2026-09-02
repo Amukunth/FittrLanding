@@ -1,7 +1,5 @@
 "use client";
 
-import { Pictogram, type PictogramName } from "@/components/Pictogram";
-
 /**
  * A full-width answer. Big enough to hit without aiming, and it commits the
  * answer on tap — the flow advances rather than waiting for a separate Next.
@@ -57,37 +55,6 @@ export function OptionButton({
           strokeLinecap="square"
         />
       </svg>
-    </button>
-  );
-}
-
-/** Multi-select tile: pictogram over label, voltage plate when chosen. */
-export function InterestChip({
-  label,
-  icon,
-  selected,
-  onToggle,
-}: {
-  label: string;
-  icon: PictogramName;
-  selected: boolean;
-  onToggle: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onToggle}
-      aria-pressed={selected}
-      className={`flex cursor-pointer flex-col items-start gap-4 border-2 px-5 py-5 transition-[background-color,border-color,box-shadow,color] duration-150 ${
-        selected
-          ? "border-voltage bg-voltage text-ink shadow-[5px_5px_0_var(--color-bone)]"
-          : "border-bone-shade bg-ink text-bone hover:border-bone hover:bg-ink-deep"
-      }`}
-    >
-      <Pictogram name={icon} className="w-11" />
-      <span className="font-display text-2xl font-extrabold uppercase leading-none tracking-[-0.01em]">
-        {label}
-      </span>
     </button>
   );
 }

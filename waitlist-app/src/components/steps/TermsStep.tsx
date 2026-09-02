@@ -3,13 +3,18 @@
 import { useId, useState } from "react";
 import { Button } from "@/components/Button";
 import { StepShell } from "@/components/StepShell";
-import { BONUS_AMOUNT } from "@/lib/constants";
+import {
+  BONUS_AMOUNT,
+  REFERRAL_BONUS_AMOUNT,
+  REFERRAL_BONUS_MAX_REFERRALS,
+  REFERRAL_BONUS_MAX_TOTAL,
+} from "@/lib/constants";
 import { LEGAL_SECTIONS } from "@/lib/legal-placeholder";
 
 /**
  * The plain-language summary is the part a person actually reads, so it leads
- * at full size on a bone plate. The long form sits beneath it, scrollable, and
- * is entirely placeholder text pending counsel — see lib/legal-placeholder.ts.
+ * at full size on a bone plate. The long form sits beneath it, scrollable —
+ * the full Waitlist Terms of Service, sourced in lib/legal-placeholder.ts.
  */
 export function TermsStep({
   agreed,
@@ -29,9 +34,11 @@ export function TermsStep({
 
   const summary = [
     `The ${BONUS_AMOUNT} is paid only if the app launches.`,
+    `It is Fittr in-app credit, not cash — usable only inside the app, never withdrawn.`,
     `It is credited after launch, not immediately.`,
     `Limited to the first 1,000 eligible signups.`,
     `Only available in eligible states.`,
+    `Referrals earn ${REFERRAL_BONUS_AMOUNT} in-app credit each, up to ${REFERRAL_BONUS_MAX_REFERRALS} (${REFERRAL_BONUS_MAX_TOTAL} total) — also non-withdrawable.`,
     `One bonus per person — duplicate or fraudulent signups are voided.`,
   ];
 
@@ -91,8 +98,8 @@ export function TermsStep({
           className="mt-3 max-h-72 overflow-y-auto border-2 border-bone-ink bg-ink-deep px-5 py-5"
         >
           <p className="border-2 border-voltage px-4 py-3 text-sm font-bold uppercase leading-snug tracking-[0.04em] text-voltage">
-            Placeholder text — not the real agreement. Requires legal review and
-            replacement before launch.
+            Waitlist Terms of Service — Dawgear, LLC. Last updated August 31,
+            2026.
           </p>
 
           {LEGAL_SECTIONS.map((section, index) => (

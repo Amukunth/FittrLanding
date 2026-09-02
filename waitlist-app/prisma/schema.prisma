@@ -4,7 +4,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
 /// One waitlist signup. A row is only ever written for someone who confirmed
@@ -20,26 +20,21 @@ model Signup {
   /// query that derives waitlist position states its own conditions.
   ageConfirmed Boolean @default(true) @map("age_confirmed")
 
-  state String?
+  phone String?
 
-  /// SQLite has no array type. Stored as a comma-separated list of chip
-  /// values, read and written only through lib/interests.ts.
-  challengeInterests String @default("") @map("challenge_interests")
-
-  referralSource String?   @map("referral_source")
-  termsAgreedAt  DateTime? @map("terms_agreed_at")
+  termsAgreedAt DateTime? @map("terms_agreed_at")
 
   referralCode   String  @unique @map("unique_referral_code")
   referredByCode String? @map("referred_by_code")
 
-  /// Null for restricted-state signups: they hold no place in the line.
   waitlistPosition Int? @map("waitlist_position")
 
   /// True only for eligible signups inside the first BONUS_CAP positions.
   bonusEligible Boolean @default(false) @map("bonus_eligible")
 
-  /// "eligible"         — in the line, with or without a bonus spot.
-  /// "restricted_state" — notify-me list only: no position, no bonus.
+  /// Set once a referred signup counts toward the referrer's reward.
+  referralRewardEligible Boolean @default(false) @map("referral_reward_eligible")
+
   status String @default("eligible")
 
   createdAt DateTime @default(now()) @map("created_at")

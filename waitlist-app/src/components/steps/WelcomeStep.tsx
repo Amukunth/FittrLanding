@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/Button";
 import { FilmingScene } from "@/components/Pictogram";
-import { BONUS_AMOUNT } from "@/lib/constants";
+import { BONUS_AMOUNT, CREDIT_DISCLAIMER } from "@/lib/constants";
 import type { WaitlistStats } from "@/lib/flow";
 
 export function WelcomeStep({
@@ -36,9 +36,8 @@ export function WelcomeStep({
             </>
           ) : (
             <>
-              {/* PLACEHOLDER: bonus amount and terms pending confirmation. */}
-              First 1,000 people get {BONUS_AMOUNT}.
-              <span className="text-voltage"> Free.</span>
+              First 1,000 people get{" "}
+              <span className="text-voltage">{BONUS_AMOUNT} in Fittr credit.</span>
             </>
           )}
         </h1>
@@ -52,24 +51,29 @@ export function WelcomeStep({
             </>
           ) : (
             <>
-              No deposit, no catch. Answer seven quick questions and the{" "}
-              {BONUS_AMOUNT} lands in your account the day we launch.
+              No deposit, no catch. Answer a few quick questions and{" "}
+              {BONUS_AMOUNT} in Fittr credit lands in your account the day we
+              launch.
             </>
           )}
         </p>
+
+        {filled ? null : (
+          <p className="max-w-[46ch] pt-2 text-bone-dim">{CREDIT_DISCLAIMER}</p>
+        )}
 
         <ul className="max-w-[46ch] space-y-2.5 pt-6 text-[0.9375rem] text-bone-dim">
           <li className="flex gap-3">
             <span aria-hidden="true" className="text-voltage">
               /
             </span>
-            About a minute. Two of the seven are optional.
+            Less than a minute.
           </li>
           <li className="flex gap-3">
             <span aria-hidden="true" className="text-voltage">
               /
             </span>
-            We check your age and state first, so nobody wastes a signup.
+            We check your age first, so nobody wastes a signup.
           </li>
           <li className="flex gap-3">
             <span aria-hidden="true" className="text-voltage">
@@ -78,18 +82,6 @@ export function WelcomeStep({
             You get your referral link at the end.
           </li>
         </ul>
-
-        <div className="pt-9">
-          {/* PLACEHOLDER: live count comes from the signups table. */}
-          <div className="notch-lg on-bone inline-flex items-baseline gap-3 bg-bone px-6 pt-6 pb-[18px] text-ink [filter:drop-shadow(5px_5px_0_var(--color-voltage))]">
-            <span className="font-display text-[2.5rem] font-black leading-[0.82] tabular-nums">
-              {stats.eligibleCount.toLocaleString("en-US")}
-            </span>
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-bone-ink">
-              of {stats.cap.toLocaleString("en-US")} spots claimed
-            </span>
-          </div>
-        </div>
 
         <FilmingScene className="mt-10 w-full" />
       </div>

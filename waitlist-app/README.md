@@ -28,8 +28,8 @@ and is a separate deployable today; in production it serves `/` and links here.
 
 ## The flow
 
-Welcome → email → age → state → name → interests → source → terms → confirmation.
-Seven question screens; interests and source are optional.
+Welcome → email → age → name → phone → terms → confirmation.
+Five question screens, all required.
 
 Two of them stop the flow:
 
@@ -47,8 +47,6 @@ instead of the offer.
 
 | What | Where |
 |---|---|
-| **All legal copy** — lorem ipsum, deliberately not plausible legalese | `src/lib/legal-placeholder.ts` |
-| **Bonus amounts** ($20 / $10) — not confirmed | `src/lib/constants.ts` |
 | **Restricted-state list** — the brief's working set, not a legal determination | `src/lib/states.ts` |
 | **Referral reward mechanics** — referrals are counted, but "moves you up the line" is not implemented | `src/components/outcomes/SuccessScreen.tsx` |
 

@@ -22,20 +22,13 @@ async function toStep(page, target) {
   if (target === "age") return;
   await page.getByRole("button", { name: /Yes, I'm 18/ }).click();
   await page.waitForTimeout(300);
-  if (target === "state") return;
-  await page.locator("select").selectOption("California");
-  await page.getByRole("button", { name: "Continue" }).click();
-  await page.waitForTimeout(300);
   if (target === "name") return;
   await page.locator('input[autocomplete="name"]').fill("Alex Rivera");
   await page.getByRole("button", { name: "Continue" }).click();
   await page.waitForTimeout(300);
-  if (target === "interests") return;
-  // Both optional steps label the action "Skip this one" until answered.
-  await page.getByRole("button", { name: /Continue|Skip this one/ }).click();
-  await page.waitForTimeout(300);
-  if (target === "source") return;
-  await page.getByRole("button", { name: /Continue|Skip this one/ }).click();
+  if (target === "phone") return;
+  await page.locator('input[type="tel"]').fill("5555550123");
+  await page.getByRole("button", { name: "Continue" }).click();
   await page.waitForTimeout(300);
 }
 
@@ -111,7 +104,7 @@ async function toStep(page, target) {
 // 6 — every control has an accessible name
 {
   const page = await browser.newPage();
-  await toStep(page, "interests");
+  await toStep(page, "terms");
   const unnamed = await page.evaluate(() =>
     [...document.querySelectorAll("button, input, select, a")].filter((el) => {
       const name =

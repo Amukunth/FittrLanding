@@ -4,16 +4,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { FlowHeader } from "@/components/FlowHeader";
 import { AgeStep } from "@/components/steps/AgeStep";
 import { EmailStep } from "@/components/steps/EmailStep";
-import { InterestsStep } from "@/components/steps/InterestsStep";
 import { NameStep } from "@/components/steps/NameStep";
-import { SourceStep } from "@/components/steps/SourceStep";
-import { StateStep } from "@/components/steps/StateStep";
+import { PhoneStep } from "@/components/steps/PhoneStep";
 import { TermsStep } from "@/components/steps/TermsStep";
 import { WelcomeStep } from "@/components/steps/WelcomeStep";
-import {
-  RestrictedScreen,
-  type CaptureState,
-} from "@/components/outcomes/RestrictedScreen";
 import { SuccessScreen } from "@/components/outcomes/SuccessScreen";
 import { UnderageScreen } from "@/components/outcomes/UnderageScreen";
 import {
@@ -25,7 +19,6 @@ import {
   type SignupResult,
   type WaitlistStats,
 } from "@/lib/flow";
-import { isRestrictedState } from "@/lib/states";
 
 const STORAGE_KEY = "fittr.waitlist.progress";
 
@@ -36,14 +29,13 @@ export function JoinFlow({
   stats: WaitlistStats;
   referredByCode: string | null;
 }) {
-  // 0 is the welcome screen; 1…7 map onto QUESTION_STEPS.
+  // 0 is the welcome screen; 1…4 map onto QUESTION_STEPS.
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState<"fwd" | "back">("fwd");
   const [data, setData] = useState<FlowData>(EMPTY_FLOW);
 
   const [outcome, setOutcome] = useState<Outcome | null>(null);
   const [result, setResult] = useState<SignupResult | null>(null);
-  const [capture, setCapture] = useState<CaptureState>("saving");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -90,40 +82,6 @@ export function JoinFlow({
     setStep((current) => Math.max(0, current - 1));
   }, []);
 
-  /** Restricted-state visitors still get their email onto the notify list. */
-  const captureNotifyOnly = useCallback(
-    async (email: string, state: string) => {
-      setCapture("saving");
-      try {
-        const response = await fetch("/api/signup", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email,
-            state,
-            ageConfirmed: true,
-            referredByCode,
-          }),
-        });
-        if (response.ok) setCapture("saved");
-        else if (response.status === 409) setCapture("already");
-        else setCapture("failed");
-      } catch {
-        setCapture("failed");
-      }
-    },
-    [referredByCode],
-  );
-
-  function handleStateNext() {
-    if (isRestrictedState(data.state)) {
-      setOutcome("restricted");
-      void captureNotifyOnly(data.email, data.state);
-      return;
-    }
-    goNext();
-  }
-
   async function handleSubmit() {
     setSubmitting(true);
     setError(null);
@@ -134,11 +92,9 @@ export function JoinFlow({
         body: JSON.stringify({
           email: data.email,
           name: data.name,
-          state: data.state,
+          phone: data.phone,
           ageConfirmed: true,
           termsAgreed: true,
-          challengeInterests: data.interests,
-          referralSource: data.source || null,
           referredByCode,
         }),
       });
@@ -167,19 +123,6 @@ export function JoinFlow({
   }
 
   if (outcome === "underage") return <Frame><UnderageScreen /></Frame>;
-
-  if (outcome === "restricted") {
-    return (
-      <Frame>
-        <RestrictedScreen
-          state={data.state}
-          email={data.email}
-          capture={capture}
-          onRetry={() => void captureNotifyOnly(data.email, data.state)}
-        />
-      </Frame>
-    );
-  }
 
   if (outcome === "success" && result) {
     return (
@@ -226,28 +169,16 @@ export function JoinFlow({
               else setOutcome("underage");
             }}
           />
-        ) : name === "state" ? (
-          <StateStep
-            value={data.state}
-            onChange={(state) => patch({ state })}
-            onNext={handleStateNext}
-          />
         ) : name === "name" ? (
           <NameStep
             value={data.name}
             onChange={(value) => patch({ name: value })}
             onNext={goNext}
           />
-        ) : name === "interests" ? (
-          <InterestsStep
-            value={data.interests}
-            onChange={(interests) => patch({ interests })}
-            onNext={goNext}
-          />
-        ) : name === "source" ? (
-          <SourceStep
-            value={data.source}
-            onChange={(source) => patch({ source })}
+        ) : name === "phone" ? (
+          <PhoneStep
+            value={data.phone}
+            onChange={(value) => patch({ phone: value })}
             onNext={goNext}
           />
         ) : (

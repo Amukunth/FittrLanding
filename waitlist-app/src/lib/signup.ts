@@ -3,28 +3,27 @@ import "server-only";
 import { prisma } from "@/lib/db";
 import { BONUS_CAP } from "@/lib/constants";
 import { generateReferralCode, normalizeCode } from "@/lib/referral";
-import { encodeInterests, isValidSource } from "@/lib/options";
-import { isRestrictedState, isValidState } from "@/lib/states";
-import { isValidEmail, isValidName, normalizeEmail } from "@/lib/validation";
+import {
+  isValidEmail,
+  isValidName,
+  isValidPhone,
+  normalizeEmail,
+  normalizePhone,
+} from "@/lib/validation";
 
 export type SignupInput = {
   email: string;
-  state: string;
   ageConfirmed: boolean;
-  /** Null for notify-only captures, which stop before the name step. */
-  name?: string | null;
-  /** Only the full flow reaches the terms checkbox. */
-  termsAgreed?: boolean;
-  challengeInterests?: string[];
-  referralSource?: string | null;
+  name: string;
+  phone: string;
+  termsAgreed: boolean;
   referredByCode?: string | null;
 };
 
 export type SignupRecord = {
   email: string;
   name: string | null;
-  status: "eligible" | "restricted_state";
-  state: string | null;
+  status: "eligible";
   referralCode: string;
   waitlistPosition: number | null;
   bonusEligible: boolean;
@@ -79,21 +78,15 @@ export async function createSignup(
   input: SignupInput,
 ): Promise<CreateSignupResult> {
   const email = normalizeEmail(input.email);
-  const name = input.name?.trim() || null;
+  const name = input.name.trim();
 
   if (!input.ageConfirmed) return { ok: false, reason: "age_not_confirmed" };
   if (!isValidEmail(email)) return { ok: false, reason: "invalid" };
-  if (name !== null && !isValidName(name)) return { ok: false, reason: "invalid" };
-  if (!isValidState(input.state)) return { ok: false, reason: "invalid" };
-  if (!isValidSource(input.referralSource)) return { ok: false, reason: "invalid" };
+  if (!isValidName(name)) return { ok: false, reason: "invalid" };
+  if (!isValidPhone(input.phone)) return { ok: false, reason: "invalid" };
+  if (!input.termsAgreed) return { ok: false, reason: "invalid" };
 
-  const restricted = isRestrictedState(input.state);
-
-  // A full signup must carry a name and an accepted agreement; a notify-only
-  // capture must carry neither. Reject anything in between.
-  if (!restricted && (name === null || !input.termsAgreed)) {
-    return { ok: false, reason: "invalid" };
-  }
+  const phone = normalizePhone(input.phone);
 
   try {
     const created = await prisma.$transaction(async (tx) => {
@@ -123,33 +116,24 @@ export async function createSignup(
         referralCode = generateReferralCode();
       }
 
-      // Restricted-state signups join the notify-me list only: they hold no
-      // position, so they never consume one of the capped bonus spots.
-      let waitlistPosition: number | null = null;
-      let bonusEligible = false;
-
-      if (!restricted) {
-        const ahead = await tx.signup.count({
-          where: { status: "eligible", ageConfirmed: true },
-        });
-        waitlistPosition = ahead + 1;
-        bonusEligible = waitlistPosition <= BONUS_CAP;
-      }
+      const ahead = await tx.signup.count({
+        where: { status: "eligible", ageConfirmed: true },
+      });
+      const waitlistPosition = ahead + 1;
+      const bonusEligible = waitlistPosition <= BONUS_CAP;
 
       return tx.signup.create({
         data: {
           email,
           name,
+          phone,
           ageConfirmed: true,
-          state: input.state,
-          challengeInterests: encodeInterests(input.challengeInterests ?? []),
-          referralSource: input.referralSource || null,
-          termsAgreedAt: input.termsAgreed ? new Date() : null,
+          termsAgreedAt: new Date(),
           referralCode,
           referredByCode,
           waitlistPosition,
           bonusEligible,
-          status: restricted ? "restricted_state" : "eligible",
+          status: "eligible",
         },
       });
     });
@@ -168,8 +152,6 @@ function toRecord(
   signup: {
     email: string;
     name: string | null;
-    status: string;
-    state: string | null;
     referralCode: string;
     waitlistPosition: number | null;
     bonusEligible: boolean;
@@ -179,8 +161,7 @@ function toRecord(
   return {
     email: signup.email,
     name: signup.name,
-    status: signup.status === "restricted_state" ? "restricted_state" : "eligible",
-    state: signup.state,
+    status: "eligible",
     referralCode: signup.referralCode,
     waitlistPosition: signup.waitlistPosition,
     bonusEligible: signup.bonusEligible,

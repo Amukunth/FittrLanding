@@ -2,7 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Wordmark } from "@/components/Wordmark";
-import { BONUS_AMOUNT, REFERRAL_BONUS_AMOUNT } from "@/lib/constants";
+import {
+  BONUS_AMOUNT,
+  CREDIT_DISCLAIMER,
+  REFERRAL_BONUS_AMOUNT,
+  REFERRAL_BONUS_MAX_REFERRALS,
+  REFERRAL_BONUS_MAX_TOTAL,
+} from "@/lib/constants";
 import type { SignupResult } from "@/lib/flow";
 
 const SHARE_TEXT =
@@ -95,13 +101,12 @@ export function SuccessScreen({
           ) : null}
         </div>
 
-        {/* PLACEHOLDER: bonus amount and terms pending confirmation. */}
         <p className="pt-6 text-bone-dim">
           {signup.bonusEligible ? (
             <>
               You made the first 1,000, so{" "}
               <span className="font-bold text-voltage">
-                {BONUS_AMOUNT} is held for you
+                {BONUS_AMOUNT} in Fittr credit is held for you
               </span>{" "}
               and lands in your account the day we launch.
             </>
@@ -115,6 +120,10 @@ export function SuccessScreen({
             </>
           )}
         </p>
+
+        {signup.bonusEligible ? (
+          <p className="pt-2 text-bone-dim">{CREDIT_DISCLAIMER}</p>
+        ) : null}
       </div>
 
       {/* ── referral: committed colour, full-bleed band ───────────── */}
@@ -123,10 +132,15 @@ export function SuccessScreen({
           Bring people with you.
         </h2>
 
-        {/* PLACEHOLDER: referral bonus amount and mechanics not finalised. */}
         <p className="max-w-[46ch] pt-3 text-[1.0625rem] leading-snug text-voltage-shade">
-          {REFERRAL_BONUS_AMOUNT} more for every friend who joins the waitlist on
-          your link and downloads the app at launch.
+          {REFERRAL_BONUS_AMOUNT} in Fittr credit for every friend who joins the
+          waitlist on your link and downloads the app at launch — up to{" "}
+          {REFERRAL_BONUS_MAX_REFERRALS} referrals ({REFERRAL_BONUS_MAX_TOTAL}{" "}
+          total).
+        </p>
+
+        <p className="max-w-[46ch] pt-2 text-[0.9375rem] leading-snug text-voltage-shade">
+          {CREDIT_DISCLAIMER}
         </p>
 
         {returning || signup.referralCount > 0 ? (

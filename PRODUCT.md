@@ -28,13 +28,13 @@ Contest types at launch concept: push-ups, planks, wall-sits, running (head-to-h
 - Real-money wagering on physical performance is a regulated space; the page should not overstate legality, availability, or make claims the company can't back (e.g., "available in your state," specific payout guarantees) until confirmed.
 - Referral mechanic is core to distribution — the page must support both a first-visit email-capture path and a referred-visit path (e.g., "so-and-so challenged you").
 - Contest set as briefed: push-ups, plank holds, wall sits and other short bodyweight challenges (camera-verified), plus running and cycling as an additional mode (Apple Watch-verified).
-- Hero hook (per 2026-07-29 brief): first 1,000 waitlist joiners get $20 credited at launch, no deposit required. Exact funding source, eligibility fine print, and what happens past 1,000 spots are not finalized — flagged as a placeholder in the markup until confirmed.
-- Signup flow (built 2026-07-30 in `waitlist-app/`): seven question screens — email, age, state, name, challenge interests, referral source, terms — with interests and source optional. Two screens terminate the flow: under-18 (no data collected at all) and a restricted state (email captured to a notify-me list only, with no queue position and no bonus).
+- Hero hook (per Waitlist Terms of Service, last updated 2026-08-31): first 1,000 waitlist joiners get $10 in non-withdrawable Fittr in-app credit at launch, no deposit required, contingent on the app actually launching.
+- Signup flow (built 2026-07-30 in `waitlist-app/`, phone added 2026-09-01): five question screens — email, age, name, phone, terms — all required. Two screens terminate the flow: under-18 (no data collected at all) and a restricted state (email captured to a notify-me list only, with no queue position and no bonus).
 - Hard 18+ gate, enforced both client-side and server-side.
 - Waitlist position is the count of eligible, age-confirmed signups at the moment of insert; restricted-state signups hold no position and so never consume a capped bonus spot.
-- Undecided: pricing, rake/fee structure, state/age eligibility rules, referral bonus amount and structure, exact contest catalog beyond those named.
+- Undecided: pricing, rake/fee structure, state/age eligibility rules, exact contest catalog beyond those named.
 - Placeholder, pending gaming counsel: the restricted-state list currently used is Arizona, Arkansas, Connecticut, Hawaii, Iowa, Louisiana, Montana, South Carolina, South Dakota, Tennessee, Utah. This is the brief's working set, not a legal determination.
-- Placeholder, pending confirmation: a $10 referral reward per friend who joins and downloads at launch. Referrals are currently counted only — no queue-position movement is implemented.
+- Per the Waitlist Terms of Service: $5 in-app credit per friend who joins and downloads at launch, capped at 2 referrals ($10 total), also contingent on launch. Referrals are currently counted only — no queue-position movement is implemented.
 
 ## Brand Commitments
 

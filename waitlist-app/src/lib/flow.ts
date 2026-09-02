@@ -5,53 +5,36 @@ export type WaitlistStats = {
   cap: number;
 };
 
-/** The seven question screens. Welcome sits at index 0 and carries no rail. */
-export const QUESTION_STEPS = [
-  "email",
-  "age",
-  "state",
-  "name",
-  "interests",
-  "source",
-  "terms",
-] as const;
+/** The five question screens. Welcome sits at index 0 and carries no rail. */
+export const QUESTION_STEPS = ["email", "age", "name", "phone", "terms"] as const;
 
 export type QuestionStep = (typeof QUESTION_STEPS)[number];
 
 export const TOTAL_STEPS = QUESTION_STEPS.length;
 
-/**
- * Terminal states. `underage` and `restricted` end the flow; only `restricted`
- * still writes a row, because that visitor asked to be told when their state
- * opens up.
- */
-export type Outcome = "underage" | "restricted" | "success";
+/** Terminal states. `underage` ends the flow client-side with no row written. */
+export type Outcome = "underage" | "success";
 
 export type FlowData = {
   email: string;
   ageConfirmed: boolean | null;
-  state: string;
   name: string;
-  interests: string[];
-  source: string;
+  phone: string;
   termsAgreed: boolean;
 };
 
 export const EMPTY_FLOW: FlowData = {
   email: "",
   ageConfirmed: null,
-  state: "",
   name: "",
-  interests: [],
-  source: "",
+  phone: "",
   termsAgreed: false,
 };
 
 export type SignupResult = {
   email: string;
   name: string | null;
-  status: "eligible" | "restricted_state";
-  state: string | null;
+  status: "eligible";
   referralCode: string;
   waitlistPosition: number | null;
   bonusEligible: boolean;
