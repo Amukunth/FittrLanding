@@ -70,7 +70,20 @@
     io.observe(el);
   }
 
-  once($('.tally'), () => countTo($('#tally-n')), 0.6);
+  // Live total from the waitlist app, which serves this page on the same
+  // origin. On the standalone landing deploy (or a slow response) the request
+  // fails or times out and the number shipped in the markup is used instead.
+  const tallyN = $('#tally-n');
+  const liveTally = Promise.race([
+    fetch('/api/stats', { cache: 'no-store' })
+      .then(r => (r.ok ? r.json() : null))
+      .then(s => {
+        if (tallyN && s && Number.isFinite(s.displayCount)) tallyN.dataset.to = s.displayCount;
+      }),
+    new Promise(resolve => setTimeout(resolve, 1500)),
+  ]).catch(() => {});
+
+  once($('.tally'), () => liveTally.then(() => countTo(tallyN)), 0.6);
 
   // The lock-on: brackets snap to the body, reps tick, stamp lands.
   once($('#hud'), () => {

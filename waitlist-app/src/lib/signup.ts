@@ -1,7 +1,11 @@
 import "server-only";
 
 import { prisma } from "@/lib/db";
-import { BONUS_CAP } from "@/lib/constants";
+import {
+  BONUS_CAP,
+  DISPLAY_COUNT_BASE,
+  DISPLAY_COUNT_SINCE,
+} from "@/lib/constants";
 import { generateReferralCode, normalizeCode } from "@/lib/referral";
 import {
   isValidEmail,
@@ -36,11 +40,16 @@ export type CreateSignupResult =
 
 /** Live totals for the counters on the welcome and success screens. */
 export async function getWaitlistStats() {
-  const eligible = await prisma.signup.count({
-    where: { status: "eligible", ageConfirmed: true },
-  });
+  const where = { status: "eligible", ageConfirmed: true };
+  const [eligible, sinceBase] = await Promise.all([
+    prisma.signup.count({ where }),
+    prisma.signup.count({
+      where: { ...where, createdAt: { gt: DISPLAY_COUNT_SINCE } },
+    }),
+  ]);
   return {
     eligibleCount: eligible,
+    displayCount: DISPLAY_COUNT_BASE + sinceBase,
     bonusSpotsRemaining: Math.max(0, BONUS_CAP - eligible),
     bonusSpotsFilled: eligible >= BONUS_CAP,
     cap: BONUS_CAP,
