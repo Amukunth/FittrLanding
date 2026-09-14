@@ -70,34 +70,7 @@
     io.observe(el);
   }
 
-  /* ── live waitlist stats ─────────────────────────────────────────
-     Same-origin "/api/stats" — served by the waitlist-app deployment
-     once both apps are live behind the same domain (see WAITLIST_URL
-     above). Never cached server-side, so this is always current. On
-     failure the shipped fallback markup stands: "0 of 1,000 claimed"
-     and an unfilled position rather than a fabricated number. */
-
-  async function loadStats() {
-    try {
-      const res = await fetch('/api/stats');
-      if (!res.ok) return null;
-      return await res.json();
-    } catch {
-      return null;
-    }
-  }
-
-  loadStats().then((stats) => {
-    if (stats) {
-      $('#tally-n').dataset.to = String(stats.eligibleCount);
-      const posn = $('#refer-posn');
-      if (posn) posn.textContent = `#${(stats.eligibleCount + 1).toLocaleString('en-US')}`;
-    }
-    // Wired up after the fetch settles so the count-up animates to the
-    // real number; IntersectionObserver still fires immediately if the
-    // tally is already on screen by the time this runs.
-    once($('.tally'), () => countTo($('#tally-n')), 0.6);
-  });
+  once($('.tally'), () => countTo($('#tally-n')), 0.6);
 
   // The lock-on: brackets snap to the body, reps tick, stamp lands.
   once($('#hud'), () => {
