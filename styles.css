@@ -200,6 +200,21 @@ a{color:inherit}
   font-size:var(--fs-body);margin-bottom:var(--s-xl);
 }
 
+/* the launch offer sits under the pitch as a secondary hook */
+.hero__offer{
+  order:3;margin-bottom:var(--s-xl);
+  padding-left:var(--s-md);border-left:2px solid var(--voltage);
+}
+.hero__offer-line{
+  font-family:var(--display);font-weight:800;font-size:var(--fs-punch);
+  line-height:1;letter-spacing:-.01em;text-transform:uppercase;
+  text-wrap:balance;
+}
+.hero__offer-note{
+  max-width:44ch;margin-top:var(--s-sm);
+  color:var(--bone-shade);font-size:var(--fs-body);
+}
+
 .scene{order:5;margin:var(--s-xl) -20px 0;position:relative}
 .scene__svg{width:100%;height:auto}
 .scene__rec{opacity:.35}
@@ -519,10 +534,10 @@ html.js .scene__rec{animation:rec 2.4s steps(1,end) infinite}
     column-gap:var(--s-3xl);
     align-items:center;
   }
-  .hero__inner>.kicker,.hero__h,.hero__sub,.join,.tally{grid-column:1}
+  .hero__inner>.kicker,.hero__h,.hero__sub,.hero__offer,.join,.tally{grid-column:1}
   .tally{justify-self:start}
   .scene{
-    grid-column:2;grid-row:1 / span 5;
+    grid-column:2;grid-row:1 / span 6;
     margin:0;align-self:center;
   }
   .hero__h{font-size:var(--fs-display-lg)}
