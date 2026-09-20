@@ -328,7 +328,43 @@ a{color:inherit}
   color:var(--bone-ink);
 }
 
-/* ── 4 · proof + referral ───────────────────────────────────────── */
+/* ── 4 · game modes ─────────────────────────────────────────────── */
+
+/* formats, not exercises: dark plates on black, so this never reads as a
+   continuation of the bone tale-of-the-tape sheet directly above */
+.modes{
+  padding:var(--s-4xl) 0;
+  border-bottom:2px solid rgba(239,232,216,.16);
+}
+.modes .kicker{margin-bottom:var(--s-md)}
+.modes .h2{margin-bottom:var(--s-2xl)}
+
+.modes__grid{display:grid;gap:var(--s-md)}
+
+.mode{
+  display:grid;align-content:start;gap:var(--s-md);
+  padding:var(--s-lg);
+  background:var(--ink-black-deep);
+  border:2px solid rgba(239,232,216,.18);
+  border-top:4px solid var(--voltage);
+  /* the print registration offset, held far back so four of them stay quiet */
+  box-shadow:6px 6px 0 rgba(200,255,46,.1);
+}
+.mode__ico{display:block;width:48px;color:var(--voltage)}
+.mode__ico svg{width:100%;height:auto}
+.mode__name{
+  font-family:var(--display);font-weight:800;font-size:var(--fs-punch);line-height:1;
+  text-transform:uppercase;letter-spacing:-.005em;
+}
+.mode__desc{color:var(--bone-dim);font-size:var(--fs-body-sm);line-height:1.45}
+
+.modes__foot{
+  margin-top:var(--s-xl);
+  font-size:var(--fs-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--bone-shade);
+}
+
+/* ── 5 · proof + referral ───────────────────────────────────────── */
 
 .proof{padding:var(--s-4xl) 0}
 .proof__inner{margin-bottom:var(--s-4xl)}
@@ -403,7 +439,7 @@ a{color:inherit}
   color:var(--voltage);font-variant-numeric:tabular-nums;
 }
 
-/* ── 5 · close ──────────────────────────────────────────────────── */
+/* ── 6 · close ──────────────────────────────────────────────────── */
 
 .close{padding:var(--s-4xl) 0;border-top:2px solid rgba(239,232,216,.16)}
 .close__h{
@@ -505,6 +541,11 @@ html.js .scene__rec{animation:rec 2.4s steps(1,end) infinite}
   .step__ico{width:72px;height:72px;padding:11px;align-self:center}
   .step__p{margin-top:8px}
 
+  .modes{padding:var(--s-5xl) 0}
+  .modes__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-lg)}
+  .mode{padding:var(--s-xl)}
+  .mode__ico{width:56px}
+
   .tape__row{
     grid-template-columns:64px minmax(0,1fr) 150px;
     align-items:center;
@@ -549,6 +590,9 @@ html.js .scene__rec{animation:rec 2.4s steps(1,end) infinite}
   }
   .hud{margin-top:0}
   .proof__punch{font-size:var(--fs-punch-lg)}
+
+  .modes__grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .mode__ico{width:64px}
 
   .step{
     grid-template-columns:60px 72px minmax(0,1fr) minmax(0,1.15fr);
