@@ -99,8 +99,12 @@
         </a>
       </div>
 
+      <!-- Live count, fetched from /api/stats by app.js. The number shipped
+           here is only the fallback for no-JS/first-paint, so it is the real
+           count as of the last deploy and drifts low between them — never a
+           padded or invented figure. -->
       <div class="tally">
-        <span class="tally__n" id="tally-n" data-to="4568">4,568</span>
+        <span class="tally__n" id="tally-n" data-to="29">29</span>
         <span class="tally__l">on the waitlist</span>
       </div>
 
@@ -479,9 +483,11 @@
           </p>
           <a class="btn btn--ghost js-join-link" href="/join">Claim your place</a>
         </div>
+        <!-- Live position, fetched from /api/stats by app.js. Ships unfilled
+             rather than guessing a number the page cannot know. -->
         <div class="refer__pos">
           <span class="refer__poslab">Next position in line</span>
-          <span class="refer__posn" id="refer-posn">#504</span>
+          <span class="refer__posn" id="refer-posn">#—</span>
         </div>
       </div>
     </div>

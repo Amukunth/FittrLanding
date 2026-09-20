@@ -1,6 +1,5 @@
 export type WaitlistStats = {
   eligibleCount: number;
-  displayCount: number;
   bonusSpotsRemaining: number;
   bonusSpotsFilled: boolean;
   cap: number;
