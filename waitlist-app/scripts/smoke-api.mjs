@@ -1,6 +1,6 @@
 /**
  * End-to-end checks for the rules that are easy to get wrong: queue position,
- * the bonus cap, referral crediting and duplicates.
+ * referral-code handling and duplicates.
  *
  * Re-runnable against a database that already has rows — every address is
  * unique per run and every position is asserted relative to the count the run
@@ -48,7 +48,7 @@ const stats = await (await fetch(`${BASE}/api/stats`)).json();
 const base = stats.eligibleCount;
 console.log(`baseline: ${base} eligible signups\n`);
 
-// 1 — an eligible signup takes the next position and, under the cap, a bonus
+// 1 — an eligible signup takes the next position
 const alexEmail = email("alex");
 const a = await post("/api/signup", {
   email: alexEmail, name: "Alex Rivera",
@@ -58,7 +58,9 @@ const codeA = a.json?.signup?.referralCode;
 check("eligible signup created", a.status === 201, `status ${a.status}`);
 check("takes the next position", a.json?.signup?.waitlistPosition === base + 1,
   `expected ${base + 1}, got ${a.json?.signup?.waitlistPosition}`);
-check("bonus eligible under the cap",
+// The bonus programme is withdrawn and nothing renders this, but the column
+// is still written — this guards that leftover plumbing until it is removed.
+check("bonus_eligible still written under the cap",
   a.json?.signup?.bonusEligible === (base + 1 <= stats.cap));
 check("referral code is 6 unambiguous chars", /^[2-9A-HJ-NP-Z]{6}$/.test(codeA ?? ""), codeA);
 
@@ -75,7 +77,7 @@ const free = await post("/api/email", { email: email("nobody") });
 check("email check reports taken", taken.json?.taken === true);
 check("email check reports free", free.json?.taken === false);
 
-// 4 — a referral from a real code is credited
+// 4 — a signup carrying a real referral code is recorded against it
 const b = await post("/api/signup", {
   email: email("sam"), name: "Sam Okafor", phone: "5555550100",
   ageConfirmed: true, termsAgreed: true, referredByCode: codeA,
@@ -89,7 +91,7 @@ const c = await post("/api/signup", {
   email: email("kim"), name: "Kim Park", phone: "5555550100",
   ageConfirmed: true, termsAgreed: true, referredByCode: "ZZZZZZ",
 });
-check("unknown referral code accepted but not credited", c.status === 201, `status ${c.status}`);
+check("unknown referral code accepted but not stored", c.status === 201, `status ${c.status}`);
 check("takes the next position", c.json?.signup?.waitlistPosition === base + 3,
   `expected ${base + 3}, got ${c.json?.signup?.waitlistPosition}`);
 
@@ -114,14 +116,15 @@ const badPhone = await post("/api/signup", {
 });
 check("malformed phone → 400", badPhone.status === 400, `status ${badPhone.status}`);
 
-// 8 — the return visit shows the referral that was just credited
+// 8 — the return visit reports the place in line held by that code
 const status = await fetch(`${BASE}/status/${codeA}`);
 // React separates adjacent text nodes with <!-- --> in server-rendered markup.
 const html = (await status.text()).replace(/<!--[\s\S]*?-->/g, "").replace(/\s+/g, " ");
 check("status page renders", status.status === 200, `status ${status.status}`);
-check("status page shows the 1 referral", /1 friend has joined on your link/i.test(html));
+check("status page shows the place in line", /Your place in line/i.test(html));
+check("status page shows the position", html.includes(`#${(base + 1).toLocaleString("en-US")}`));
 
-// 9 — the shareable link carries the code into the flow, normalised
+// 9 — links shared before the programme was withdrawn still resolve
 const redirect = await fetch(`${BASE}/r/${codeA?.toLowerCase()}`, { redirect: "manual" });
 const location = redirect.headers.get("location") ?? "";
 check("/r/code redirects", redirect.status === 307, `status ${redirect.status}`);

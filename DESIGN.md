@@ -138,7 +138,7 @@ Confirmed rejections: no glow or neon bloom, no glassmorphism, no gradient text,
 A three-material palette borrowed from two-color screenprinting: black stock, one acid spot color, one bone paper.
 
 ### Primary
-- **Voltage** (#C8FF2E): The single accent, and the product's whole chromatic identity. It is a spot ink. It fills the primary CTA, the referral region, the step rail, the verification lock-on, and the payload words of headlines ("WIN REAL MONEY"). At 16.8:1 against the black ground it is also the highest-contrast element on the page, which is why it always marks the thing to do next.
+- **Voltage** (#C8FF2E): The single accent, and the product's whole chromatic identity. It is a spot ink. It fills the primary CTA, the step rail, the verification lock-on, and the payload words of headlines ("WIN REAL MONEY"). At 16.8:1 against the black ground it is also the highest-contrast element on the page, which is why it always marks the thing to do next.
 - **Voltage Deep** (#A8DB16): The pressed/hover state of any voltage surface. Reads as more ink laid down, not as a dimmer light.
 - **Voltage Shade** (#2E3A00): Secondary text *on* voltage regions. Derived from the accent hue so type on a green plate is never gray.
 
@@ -183,7 +183,7 @@ Every size in the build is a `--fs-*` custom property; no literal `font-size` ex
 
 ## Layout
 
-Mobile-first, single column, with a hard 20px gutter on phones and a 1180px max container from `lg` up. Full-page sections alternate material by background — black stock, bone plate, voltage region — so the scroll reads as a stack of printed sheets rather than a page with cards on it; the referral region is currently inset in its container rather than full-bleed, which is a known gap against that rule (see Do's and Don'ts).
+Mobile-first, single column, with a hard 20px gutter on phones and a 1180px max container from `lg` up. Full-page sections alternate material by background — black stock, bone plate, voltage region — so the scroll reads as a stack of printed sheets rather than a page with cards on it.
 
 Rhythm uses an 8px base scale (4 / 8 / 16 / 24 / 32 / 48 / 64 / 96 / 128). Section vertical padding is `4xl` (96px) on phones and `5xl` (128px) from `md` up. Within a group, headings always take more space above than below — `xl` above, `md` below — so a heading belongs to the block beneath it.
 
@@ -230,7 +230,7 @@ The second recurring geometry is the **shear**: a fixed −8° diagonal, used fo
 - **Ghost:** Transparent fill, 2px bone rule, bone text. Hover inverts to bone fill with ink-black text.
 
 ### Cards / Containers
-There are no cards. There are **plates**: bone or voltage rectangles that carry data. A plate has zero radius, 24px internal padding, an optional ticket notch on its top-right corner, and no border unless it sits on its own material. Plates never nest. One exception: a plate set *against a voltage ground* (the queue-position plate inside the referral region) is ink-black instead, because bone-on-voltage and voltage-on-voltage both lose the contrast that makes a plate read as a distinct object — ink-black is the only material that still pops.
+There are no cards. There are **plates**: bone or voltage rectangles that carry data. A plate has zero radius, 24px internal padding, an optional ticket notch on its top-right corner, and no border unless it sits on its own material. Plates never nest. One exception, with no instance on the page since the referral region was removed: a plate set *against a voltage ground* is ink-black instead, because bone-on-voltage and voltage-on-voltage both lose the contrast that makes a plate read as a distinct object — ink-black is the only material that still pops.
 
 ### Inputs / Fields
 - **Style:** Ink-black fill, 2px bone rule, zero radius, 20px/18px padding, bone text, bone-shade placeholder (6.2:1).
@@ -246,8 +246,8 @@ Two placements: **inked directly on the ground** (the tale-of-the-tape rows, ink
 ### Verification HUD (signature)
 The proof device: a viewfinder frame of four voltage corner brackets that snap inward to lock onto a pictogram figure, a tabular rep counter that ticks, and a notched "VERIFIED" stamp that lands rotated −8°. This is the system's one authored *signature* motion, and it is deliberately played twice — once small in the hero (the pictogram being filmed), once large in the proof section (the same lock-on, as the argument) — because reusing one authored moment across two moments is the intended repetition, not scatter. It is distinct from the ambient/functional motion elsewhere: the phone's REC dot blinks continuously as a small always-on signal (not a "moment"), and the mobile dock's slide-in is ordinary UI chrome, not part of the authored set. All of it is fully static under `prefers-reduced-motion` except the REC dot, which stops blinking outright.
 
-### Referral bar, sticky dock, and success state
-Three small components without their own named section because they borrow every token from elsewhere: a full-width voltage strip at the very top of the page when a visitor arrives via `?ref=`, naming the referrer; a mobile-only sticky dock (ink-black-deep, voltage top rule, small print-offset CTA) that appears once the hero form scrolls out of view; and the waitlist form's post-submit state, which swaps its own contents for a bone-bordered ink-black-deep panel carrying the confirmed position, the referral link, and a copy action — no new plate, button, or type role, only the existing ones recombined.
+### Sticky dock and success state
+Two small components without their own named section because they borrow every token from elsewhere: a mobile-only sticky dock (ink-black-deep, voltage top rule, small print-offset CTA) that appears once the hero CTA scrolls out of view; and the signup flow's post-submit state, a bone plate carrying the confirmed position under a notched voltage "CONFIRMED" stamp — no new plate, button, or type role, only the existing ones recombined. (A third, the voltage referral strip shown on a `?ref=` arrival, was removed with the referral programme.)
 
 ## Do's and Don'ts
 
@@ -263,7 +263,6 @@ Three small components without their own named section because they borrow every
 - **Don't** introduce a second accent color. One ink. Adding a red for errors or a blue for links breaks the press.
 - **Don't** apply any `border-radius` above 0, anywhere, including avatars and badges.
 - **Don't** use blur, backdrop-filter, glow, bloom, or a gradient fill as a color device. Two narrow exceptions, neither of which fills a shape with a color blend: a tiled `radial-gradient` dot pattern used as halftone texture (fixed small `background-size`, never `repeating-radial-gradient` from a single anchor — that rings outward and reads as a bullseye), and a `linear-gradient` used only as a `mask-image` to fade an existing texture toward transparent (an opacity fade, not a color fill).
-- **Don't** leave a section inset in its container when the system's own rule is that committed color fills full-bleed bands. The referral region currently violates this (see Layout) and is a known fix, not a sanctioned exception.
 - **Don't** use gradient text or a text-shadow glow for emphasis. Emphasis is weight, scale, or voltage.
 - **Don't** ship gray. Every muted value is a bone or voltage tint.
 - **Don't** stack a card inside a card, or add a card grid of equal icon-heading-text tiles. Data goes on plates and in the tape table.

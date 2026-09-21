@@ -20,8 +20,8 @@ and is a separate deployable today; in production it serves `/` and links here.
 | Route | What it is |
 |---|---|
 | `/join` | The flow. Accepts `?ref=CODE`. |
-| `/r/[code]` | Shareable referral link; redirects into `/join` carrying the code. |
-| `/status/[code]` | Return visit — place in line and live referral count. |
+| `/r/[code]` | Legacy referral link; still redirects into `/join` so links shared before the programme was withdrawn do not 404. |
+| `/status/[code]` | Return visit — the saved link a signup uses to check their place in line. |
 | `/api/email` | `POST` duplicate check for the email step. Rate-limited. |
 | `/api/signup` | `POST` create a signup. Rate-limited. |
 | `/api/stats` | `GET` live counts. |
@@ -35,20 +35,18 @@ Two of them stop the flow:
 
 - **Under 18** ends it in the browser. Nothing is sent and no row is written.
 - **A restricted state** ends it too, but the email is still captured to a
-  notify-me list (`status = "restricted_state"`, no queue position, no bonus).
+  notify-me list (`status = "restricted_state"`, no queue position).
 
 Waitlist position is the count of eligible, age-confirmed signups at the moment
 of insert, computed inside the same transaction as the write. Restricted-state
-rows hold no position, so they never consume one of the capped bonus spots.
-Past 1,000, signups still join and see the "bonus spots are filled" messaging
-instead of the offer.
+rows hold no position.
 
 ## ⚠️ Placeholders that must be replaced before launch
 
 | What | Where |
 |---|---|
 | **Restricted-state list** — the brief's working set, not a legal determination | `src/lib/states.ts` |
-| **Referral reward mechanics** — referrals are counted, but "moves you up the line" is not implemented | `src/components/outcomes/SuccessScreen.tsx` |
+| **Leftover bonus plumbing** — the `$10` launch bonus and `$5` referral bonus were withdrawn on 2026-09-21 and removed from every screen, but `BONUS_CAP`, the `bonus_eligible` column and the `referred_by_code` column are still written | `src/lib/constants.ts`, `src/lib/signup.ts`, `prisma/schema.prisma` |
 
 The restricted-state list needs gaming counsel, not a template: real-money
 contests touch state gambling and sweepstakes law.
@@ -77,7 +75,7 @@ Both need the dev server running (`SMOKE_BASE_URL` overrides the default port).
 # the API run makes a deliberate burst of signups, which the limiter refuses
 DISABLE_RATE_LIMIT=1 npm run dev
 
-npm run smoke:api       # position, cap, restricted-state, referral, duplicate rules
+npm run smoke:api       # position, restricted-state, referral-code, duplicate rules
 npm run smoke:browser   # focus management, keyboard submit, reduced motion, a11y names
 ```
 

@@ -18,23 +18,8 @@
      Next app's origin instead, e.g. "http://localhost:3111/join". */
   const WAITLIST_URL = '/join';
 
-  /* ── referral entry path ─────────────────────────────────────── */
-
-  const ref = new URLSearchParams(location.search).get('ref');
-  const refCode = ref && /^[A-Za-z0-9-]{1,24}$/.test(ref) ? ref : null;
-  if (refCode) {
-    const bar = $('#refbar');
-    $('#refbar-name').textContent =
-      refCode.replace(/-/g, ' ').charAt(0).toUpperCase() + refCode.replace(/-/g, ' ').slice(1);
-    bar.hidden = false;
-  }
-
-  // Every CTA on the page points into the real app, carrying the referral
-  // code along so it isn't dropped between the two sites.
-  const joinUrl = refCode
-    ? `${WAITLIST_URL}?ref=${encodeURIComponent(refCode)}`
-    : WAITLIST_URL;
-  $$('.js-join-link').forEach((a) => { a.href = joinUrl; });
+  // Every CTA on the page points into the real app.
+  $$('.js-join-link').forEach((a) => { a.href = WAITLIST_URL; });
 
   /* ── counters ────────────────────────────────────────────────── */
 
@@ -70,12 +55,11 @@
     io.observe(el);
   }
 
-  // Live counts from the waitlist app, which serves this page on the same
-  // origin. Both the tally and the next position come from eligibleCount --
-  // the real number of eligible signups, never a padded display figure.
-  // On the standalone landing deploy (or a slow response) the request fails
-  // or times out and the markup fallback stands: a count that is stale-low
-  // and an unfilled position, rather than a fabricated number.
+  // Live count from the waitlist app, which serves this page on the same
+  // origin. eligibleCount is the real number of eligible signups, never a
+  // padded display figure. On the standalone landing deploy (or a slow
+  // response) the request fails or times out and the markup fallback stands:
+  // a count that is stale-low, rather than a fabricated number.
   const tallyN = $('#tally-n');
   const liveTally = Promise.race([
     fetch('/api/stats', { cache: 'no-store' })
@@ -83,8 +67,6 @@
       .then(s => {
         if (!s || !Number.isFinite(s.eligibleCount)) return;
         if (tallyN) tallyN.dataset.to = s.eligibleCount;
-        const posn = $('#refer-posn');
-        if (posn) posn.textContent = `#${(s.eligibleCount + 1).toLocaleString('en-US')}`;
       }),
     new Promise(resolve => setTimeout(resolve, 1500)),
   ]).catch(() => {});

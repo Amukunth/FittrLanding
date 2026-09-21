@@ -27,7 +27,3 @@ export function normalizeCode(raw: string | null | undefined): string | null {
   }
   return code;
 }
-
-export function referralUrl(code: string, origin: string): string {
-  return `${origin.replace(/\/$/, "")}/r/${code}`;
-}

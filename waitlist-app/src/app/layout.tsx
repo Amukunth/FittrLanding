@@ -19,7 +19,7 @@ const archivo = Archivo({
 export const metadata: Metadata = {
   title: "Join the Fittr waitlist",
   description:
-    "Seven quick questions to claim your place in line. The first 1,000 eligible signups get a launch bonus.",
+    "A few quick questions to join the Fittr waitlist.",
   robots: { index: false, follow: false },
 };
 

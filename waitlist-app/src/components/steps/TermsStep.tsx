@@ -3,12 +3,6 @@
 import { useId, useState } from "react";
 import { Button } from "@/components/Button";
 import { StepShell } from "@/components/StepShell";
-import {
-  BONUS_AMOUNT,
-  REFERRAL_BONUS_AMOUNT,
-  REFERRAL_BONUS_MAX_REFERRALS,
-  REFERRAL_BONUS_MAX_TOTAL,
-} from "@/lib/constants";
 import { LEGAL_SECTIONS } from "@/lib/legal-placeholder";
 
 /**
@@ -33,13 +27,11 @@ export function TermsStep({
   const [attempted, setAttempted] = useState(false);
 
   const summary = [
-    `The ${BONUS_AMOUNT} is paid only if the app launches.`,
-    `It is Fittr in-app credit, not cash — usable only inside the app, never withdrawn.`,
-    `It is credited after launch, not immediately.`,
-    `Limited to the first 1,000 eligible signups.`,
-    `Only available in eligible states.`,
-    `Referrals earn ${REFERRAL_BONUS_AMOUNT} in-app credit each, up to ${REFERRAL_BONUS_MAX_REFERRALS} (${REFERRAL_BONUS_MAX_TOTAL} total) — also non-withdrawable.`,
-    `One bonus per person — duplicate or fraudulent signups are voided.`,
+    "You must be 18 or older to join.",
+    "Only available in eligible states.",
+    "Joining the waitlist is free — there is nothing to pay.",
+    "We may not launch. Joining is not a guarantee that we will.",
+    "One signup per person — duplicate or fraudulent signups are voided.",
   ];
 
   return (
@@ -56,7 +48,7 @@ export function TermsStep({
             }}
             disabled={!agreed || submitting}
           >
-            {submitting ? "Locking in your place…" : "Claim my place"}
+            {submitting ? "Joining…" : "Join the waitlist"}
           </Button>
 
           <p

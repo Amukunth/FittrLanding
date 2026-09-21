@@ -32,7 +32,6 @@
   --fs-subhead:2rem;
   --fs-punch-lg:2.25rem;
   --fs-stat:2.5rem;
-  --fs-posn:3rem;
   --fs-numeral:3.5rem;
   --fs-numeral-lg:4.5rem;
   --fs-h3:clamp(2rem,7.5vw,3rem);
@@ -69,7 +68,7 @@ a{color:inherit}
   outline:3px solid var(--bone);
   outline-offset:3px;
 }
-.refer :focus-visible,.tape :focus-visible{outline-color:var(--ink-black)}
+.tape :focus-visible{outline-color:var(--ink-black)}
 
 .wrap{width:min(100% - 40px,1180px);margin-inline:auto}
 
@@ -153,11 +152,6 @@ a{color:inherit}
 }
 .btn--ghost:hover{background:var(--bone);color:var(--ink-black)}
 
-/* ── referral bar ───────────────────────────────────────────────── */
-
-.refbar{background:var(--voltage);color:var(--ink-black);padding:12px 20px;text-align:center}
-.refbar__txt{font-size:var(--fs-micro);font-weight:700;letter-spacing:.03em}
-
 /* ── topbar ─────────────────────────────────────────────────────── */
 
 .topbar{
@@ -200,20 +194,6 @@ a{color:inherit}
   font-size:var(--fs-body);margin-bottom:var(--s-xl);
 }
 
-/* the launch offer sits under the pitch as a secondary hook */
-.hero__offer{
-  order:3;margin-bottom:var(--s-xl);
-  padding-left:var(--s-md);border-left:2px solid var(--voltage);
-}
-.hero__offer-line{
-  font-family:var(--display);font-weight:800;font-size:var(--fs-punch);
-  line-height:1;letter-spacing:-.01em;text-transform:uppercase;
-  text-wrap:balance;
-}
-.hero__offer-note{
-  max-width:44ch;margin-top:var(--s-sm);
-  color:var(--bone-shade);font-size:var(--fs-body);
-}
 
 .scene{order:5;margin:var(--s-xl) -20px 0;position:relative}
 .scene__svg{width:100%;height:auto}
@@ -277,7 +257,7 @@ a{color:inherit}
 }
 .step__p{grid-area:p;color:var(--bone-dim);max-width:60ch}
 
-/* ── 3 · tale of the tape ───────────────────────────────────────── */
+/* ── 3 · challenge types ────────────────────────────────────────── */
 
 .tape{
   background:var(--bone);color:var(--ink-black);
@@ -364,7 +344,7 @@ a{color:inherit}
   color:var(--bone-shade);
 }
 
-/* ── 5 · proof + referral ───────────────────────────────────────── */
+/* ── 5 · proof ──────────────────────────────────────────────────── */
 
 .proof{padding:var(--s-4xl) 0}
 .proof__inner{margin-bottom:var(--s-4xl)}
@@ -409,34 +389,6 @@ a{color:inherit}
   font-size:var(--fs-micro);font-weight:900;letter-spacing:.14em;text-transform:uppercase;
   transform:rotate(-8deg);
   clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
-}
-
-/* referral — committed voltage region */
-.refer{
-  background:var(--voltage);color:var(--ink-black);
-  padding:var(--s-xl) var(--s-lg);
-  display:flex;flex-direction:column;gap:var(--s-xl);
-}
-.refer__h{
-  font-family:var(--display);font-weight:800;
-  font-size:var(--fs-h3);line-height:.9;
-  text-transform:uppercase;margin-bottom:var(--s-md);
-}
-.refer__p{color:var(--voltage-shade);max-width:44ch;margin-bottom:var(--s-lg);font-weight:500}
-.refer .btn--ghost{color:var(--ink-black);box-shadow:inset 0 0 0 2px var(--ink-black)}
-.refer .btn--ghost:hover{background:var(--ink-black);color:var(--voltage)}
-.refer__pos{
-  background:var(--ink-black);color:var(--bone);
-  padding:var(--s-lg);align-self:flex-start;
-  clip-path:polygon(0 0,calc(100% - var(--notch)) 0,100% var(--notch),100% 100%,0 100%);
-}
-.refer__poslab{
-  display:block;font-size:var(--fs-label-sm);font-weight:700;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--bone-dim);margin-bottom:8px;
-}
-.refer__posn{
-  font-family:var(--display);font-weight:900;font-size:var(--fs-posn);line-height:1;
-  color:var(--voltage);font-variant-numeric:tabular-nums;
 }
 
 /* ── 6 · close ──────────────────────────────────────────────────── */
@@ -557,13 +509,6 @@ html.js .scene__rec{animation:rec 2.4s steps(1,end) infinite}
     flex-direction:column;align-items:flex-end;gap:6px;text-align:right;
   }
 
-  .refer{
-    flex-direction:row;align-items:center;justify-content:space-between;
-    padding:var(--s-2xl);gap:var(--s-2xl);
-  }
-  .refer__main{flex:1}
-  .refer__pos{flex:none;align-self:auto}
-
   .close__h{margin-bottom:var(--s-2xl)}
   .close .btn--block{width:auto;display:inline-flex;padding:24px 48px;font-size:var(--fs-btn-lg)}
 }
@@ -575,7 +520,7 @@ html.js .scene__rec{animation:rec 2.4s steps(1,end) infinite}
     column-gap:var(--s-3xl);
     align-items:center;
   }
-  .hero__inner>.kicker,.hero__h,.hero__sub,.hero__offer,.join,.tally{grid-column:1}
+  .hero__inner>.kicker,.hero__h,.hero__sub,.join,.tally{grid-column:1}
   .tally{justify-self:start}
   .scene{
     grid-column:2;grid-row:1 / span 6;

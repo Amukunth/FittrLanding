@@ -150,11 +150,7 @@ export function JoinFlow({
         }`}
       >
         {name === null ? (
-          <WelcomeStep
-            stats={stats}
-            referrerKnown={referredByCode !== null}
-            onStart={goNext}
-          />
+          <WelcomeStep stats={stats} onStart={goNext} />
         ) : name === "email" ? (
           <EmailStep
             value={data.email}

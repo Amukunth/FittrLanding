@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-/** The return visit: same confirmation screen, now with a live referral count. */
+/** The return visit: the same confirmation screen, reached by saved link. */
 export default async function StatusPage({
   params,
 }: {

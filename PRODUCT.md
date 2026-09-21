@@ -8,11 +8,11 @@ web
 
 ## Users
 
-Primary: competitive, fitness-minded 18–30 year olds who already do push-ups, planks, wall-sits, or casual running. They arrive cold via TikTok, Reddit, or a friend's referral link, not through considered comparison-shopping against other fitness apps. They have about 3 seconds to decide "is this for me" before scrolling on. They are motivated by "beat your friends, win real money" — competition and stakes, not health/wellness framing.
+Primary: competitive, fitness-minded 18–30 year olds who already do push-ups, planks, wall-sits, or casual running. They arrive cold via TikTok, Reddit, or word of mouth, not through considered comparison-shopping against other fitness apps. They have about 3 seconds to decide "is this for me" before scrolling on. They are motivated by "beat your friends, win real money" — competition and stakes, not health/wellness framing.
 
 ## Product Purpose
 
-A pre-launch waitlist landing page for an app (not yet built) that lets users wager real money on head-to-head or pooled physical skill contests — push-ups, planks, wall-sits, and running. This page's job is email capture plus a referral mechanic to build the waitlist before launch. Success = visitors who fit the target profile give their email and share their referral link, not conversion to a paid product (there isn't one yet).
+A pre-launch waitlist landing page for an app (not yet built) that lets users wager real money on head-to-head or pooled physical skill contests — push-ups, planks, wall-sits, and running. This page's job is email capture to build the waitlist before launch. Success = visitors who fit the target profile give their email, not conversion to a paid product (there isn't one yet).
 
 ## Positioning
 
@@ -26,15 +26,15 @@ Contest types at launch concept: push-ups, planks, wall-sits, running (head-to-h
 
 - App does not exist yet — this is a marketing/waitlist surface only, not a functional product screen.
 - Real-money wagering on physical performance is a regulated space; the page should not overstate legality, availability, or make claims the company can't back (e.g., "available in your state," specific payout guarantees) until confirmed.
-- Referral mechanic is core to distribution — the page must support both a first-visit email-capture path and a referred-visit path (e.g., "so-and-so challenged you").
 - Contest set as briefed: push-ups, plank holds, wall sits and other short bodyweight challenges (camera-verified), plus running and cycling as an additional mode (Apple Watch-verified).
-- Hero hook (per Waitlist Terms of Service, last updated 2026-08-31): first 1,000 waitlist joiners get $10 in non-withdrawable Fittr in-app credit at launch, no deposit required, contingent on the app actually launching.
-- Signup flow (built 2026-07-30 in `waitlist-app/`, phone added 2026-09-01): five question screens — email, age, name, phone, terms — all required. Two screens terminate the flow: under-18 (no data collected at all) and a restricted state (email captured to a notify-me list only, with no queue position and no bonus).
+- Hero hook: no monetary incentive. The page sells the product (real money on camera-verified physical challenges) and the waitlist itself, nothing else. The $10 launch credit was withdrawn on 2026-09-21, briefly reinstated the same day, then withdrawn again — it is not advertised anywhere on the site, and Waitlist Terms §6 (Launch Bonus) stays deleted to match. Do not put a dollar figure back on the page without restoring §6 and getting legal sign-off.
+- The $5 referral bonus and the referral programme were removed on 2026-09-21 and must not be reintroduced. `/r/[code]` still resolves so older links do not 404.
+- Signup flow (built 2026-07-30 in `waitlist-app/`, phone added 2026-09-01): five question screens — email, age, name, phone, terms — all required. Two screens terminate the flow: under-18 (no data collected at all) and a restricted state (email captured to a notify-me list only, with no queue position).
 - Hard 18+ gate, enforced both client-side and server-side.
-- Waitlist position is the count of eligible, age-confirmed signups at the moment of insert; restricted-state signups hold no position and so never consume a capped bonus spot.
+- Waitlist position is the count of eligible, age-confirmed signups at the moment of insert; restricted-state signups hold no position.
 - Undecided: pricing, rake/fee structure, state/age eligibility rules, exact contest catalog beyond those named.
 - Placeholder, pending gaming counsel: the restricted-state list currently used is Arizona, Arkansas, Connecticut, Hawaii, Iowa, Louisiana, Montana, South Carolina, South Dakota, Tennessee, Utah. This is the brief's working set, not a legal determination.
-- Per the Waitlist Terms of Service: $5 in-app credit per friend who joins and downloads at launch, capped at 2 referrals ($10 total), also contingent on launch. Referrals are currently counted only — no queue-position movement is implemented.
+- The referrer is still recorded in the database for links shared before the programme was withdrawn, but nothing on the site offers, displays or rewards a referral.
 
 ## Brand Commitments
 
@@ -53,9 +53,9 @@ None. No real copy, pricing, testimonials, or press exist — the product hasn't
 1. Speed of read beats depth of explanation — the 3-second scroller must grasp "wager real money on physical challenges" before anything else.
 2. The verification mechanism is the trust argument — competitors' bot scandals are the implicit contrast; lead with "can't be faked," not with generic fitness-app language.
 3. Stakes and competition over wellness — tone is "beat your friends," not "improve your health."
-4. Design for two entry paths — cold acquisition (TikTok/Reddit) and warm referral (friend's link) — without inventing product functionality that doesn't exist.
+4. Design for cold acquisition (TikTok/Reddit) without inventing product functionality that doesn't exist.
 5. Never invent legitimacy — no fake testimonials, press mentions, download counts, or availability/legal claims beyond what's confirmed.
 
 ## Accessibility & Inclusion
 
-No product-specific requirement established yet. Standard accessibility baseline applies (contrast, motion-reduction for any competitive/kinetic animation, keyboard/focus support for the email + referral form).
+No product-specific requirement established yet. Standard accessibility baseline applies (contrast, motion-reduction for any competitive/kinetic animation, keyboard/focus support for the email form).
